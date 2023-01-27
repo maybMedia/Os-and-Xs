@@ -16,7 +16,7 @@ def returnBoard(row1, row2, row3, break1):
 def findColumn(instruction):
     if instruction == 1 or instruction == 4 or instruction == 7:
         return 1
-    elif instruction == 2 or instruction == 5 or instruction == 6:
+    elif instruction == 2 or instruction == 5 or instruction == 8:
         return 2
     else:
         return 3
