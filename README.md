@@ -1,1 +1,2 @@
-# Os-and-Xs
+# Noughts and Crosses
+### Programmed in python
