@@ -1,4 +1,5 @@
 import time
+from itertools import cycle
 
 row1 = "   :   :   "
 row2 = "   :   :   "
@@ -69,52 +70,82 @@ def updateRow(column, row, symbol, row1, row2, row3):
         row3 = ''.join(row3)
         return row3
 
-def checkForWin(symbol, row1, row2, row3):
-    return False
+def checkForWin(symbol, row1, row2, row3, key):
+    if (row1[key[1]] == symbol and row2[key[2]] == symbol and row3[key[3]] == symbol) or (row1[key[1]] == symbol and row1[key[2]] == symbol and row1[key[3]] == symbol) or (row1[key[3]] == symbol and row2[key[2]] == symbol and row3[key[1]] == symbol) or (row1[key[1]] == symbol and row2[key[1]] == symbol and row3[key[1]] == symbol) or (row1[key[2]] == symbol and row2[key[2]] == symbol and row3[key[2]] == symbol) or (row1[key[3]] == symbol and row2[key[3]] == symbol and row3[key[3]] == symbol) or (row2[key[1]] == symbol and row2[key[2]] == symbol and row2[key[3]] == symbol) or (row3[key[1]] == symbol and row3[key[2]] == symbol and row3[key[3]] == symbol):
+        return True
 
-print("Are you ready to play a game of noughts and crosses?\nReset the board at any time by typing 'reset'!\nType 'yes' to start!")
-while started == False:
-    start = input('')
-    if start == 'yes':
-        started = True
+while True:
+    while started == False:
+        print("Are you ready to play a game of noughts and crosses?\nReset the board at any time by typing 'reset'!\nType 'yes' to start!")
+        start = input('')
+        if start == 'yes':
+            symbol = 'X'
+            started = True
 
-while started == True:
-    print(f"It's {symbol}'s turn!")
-    print(returnBoard(row1, row2, row3, break1))
-    instruction = input(f"Where would you like to place your {symbol}? [Position 1-9]\n")
-    if instruction != 'reset':
-        instruction = int(instruction)
-        if instruction <= 9 and instruction >= 1:
-            column = findColumn(instruction)
-            row = findRow(instruction)
-            if checkIfEmpty(row, column, row1, row2, row3, key) == True:
-                if row == 1:
-                    row1 = updateRow(column, row, symbol, row1, row2, row3)
-                elif row == 2:
-                    row2 = updateRow(column, row, symbol, row1, row2, row3)
+    while started == True:
+        print(f"It's {symbol}'s turn!")
+        print(returnBoard(row1, row2, row3, break1))
+        instruction = input(f"Where would you like to place your {symbol}? [Position 1-9]\n")
+        if instruction != 'reset':
+            if instruction.isdigit():
+                instruction = int(instruction)
+                if instruction <= 9 and instruction >= 1:
+                    column = findColumn(instruction)
+                    row = findRow(instruction)
+                    if checkIfEmpty(row, column, row1, row2, row3, key) == True:
+                        if row == 1:
+                            row1 = updateRow(column, row, symbol, row1, row2, row3)
+                        elif row == 2:
+                            row2 = updateRow(column, row, symbol, row1, row2, row3)
+                        else:
+                            row3 = updateRow(column, row, symbol, row1, row2, row3)
+                        
+                        turns = turns + 1
+
+                        if turns >= 5:
+                            if checkForWin(symbol, row1, row2, row3, key) == True:
+                                print(f"{symbol} Wins!")
+                                time.sleep(1)
+                                print('Resetting...')
+                                time.sleep(5)
+                                start = ''
+                                started = False
+                                row1 = "   :   :   "
+                                row2 = "   :   :   "
+                                row3 = "   :   :   "
+                                symbol = 'X'
+                                turns = 0
+                        
+                        if turns >= 9:
+                            print(f"It's a Tie!")
+                            time.sleep(1)
+                            print('Resetting...')
+                            time.sleep(5)
+                            start = ''
+                            started = False
+                            row1 = "   :   :   "
+                            row2 = "   :   :   "
+                            row3 = "   :   :   "
+                            symbol = 'X'
+                            turns = 0
+
+                        if symbol == 'X':
+                            symbol = 'O'
+                        else:
+                            symbol = 'X'
+                    else:
+                        print("There is already an X or an O in that position!")
                 else:
-                    row3 = updateRow(column, row, symbol, row1, row2, row3)
-                if symbol == 'X':
-                    symbol = 'O'
-                else:
-                    symbol = 'X'
-                turns = turns + 1
-                if turns >= 5:
-                    if checkForWin() == True:
-                        print(f"{symbol} Wins!")
-                        time.sleep(1)
-                        print('Resetting...')
-                        time.sleep(5)
+                    print("Sorry I didn't understand that instruction. I was expecting a number(1-9), the positions on the board are numbered as follows; 1 is top left, 2 is top middle etc.")
             else:
-                print("There is already an X or an O in that position!")
+                print("Sorry I didn't understand that instruction. I was expecting a number(1-9), the positions on the board are numbered as follows; 1 is top left, 2 is top middle etc.")
         else:
-            print("Sorry I didn't understand that instruction. I was expecting a number(1-9), the positions on the board are numbered as follows; 1 is top left, 2 is top middle etc.")
-    else:
-        print("Resetting...")
-        time.sleep(3)
-        started = False
-        row1 = "   :   :   "
-        row2 = "   :   :   "
-        row3 = "   :   :   "
-        symbol = 'X'
-        turns = 0
+            print("Resetting...")
+            time.sleep(3)
+            start = ''
+            started = False
+            row1 = "   :   :   "
+            row2 = "   :   :   "
+            row3 = "   :   :   "
+            symbol = 'X'
+            turns = 0
