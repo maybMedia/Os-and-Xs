@@ -6,6 +6,8 @@
 3. I then created a loop which printed the board and who's turn it is to the console each turn and requested an input from the user. This input is then interpreted and a row and column is given to the value.
 4. I then created a function which checks if there is already a symbol in that row and column. I feel like I have not elegantly implemented this function as it uses 3 if statements to determine the row to check.
 5. Then I created a function which if the row and column are empty, replaces the blank space with the symbol of the current player.
+6. I then implemented a function which detects winning combinations and drawn games.
+7. I then implemented the ability to restart and reset the match throughout or at the end of the games.
 
 ## Screenshots
 ![](./screenshots/InefficientFunction.png)
