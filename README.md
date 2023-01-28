@@ -8,8 +8,8 @@
 5. Then I created a function which if the row and column are empty, replaces the blank space with the symbol of the current player.
 
 ## Screenshots
-[Inefficient function which detects if there is a win.](./screenshots/InefficientFunction.png)
-[Another unelegant solution to update rows, similar method used to check for empty positions](./screenshots/UpdateRowFunction.png)
+![Inefficient function which detects if there is a win.](./screenshots/InefficientFunction.png)
+![Another unelegant solution to update rows, similar method used to check for empty positions](./screenshots/UpdateRowFunction.png)
 
 ## Tools Used
 - [RealPython - Used for the idea though did not use any of the source code etc.](https://realpython.com/tic-tac-toe-python/#step-2-set-up-the-tic-tac-toe-game-logic-in-python)
